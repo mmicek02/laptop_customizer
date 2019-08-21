@@ -28,11 +28,19 @@ class App extends Component {
     });
   }
 
-  updateItem = (feature, newValue) => {
-    const selected = Object.assign({}, this.state.selected);
-    selected[feature] = newValue;
+  updatePrice = (feature, newPrice) => {
+    const price = Object.assign({}, this.state.price);
+    price[feature] = newPrice;
     this.setState({
-      selected
+      price
+    });
+  }
+
+  updatePrice = (feature, newTotal) => {
+    const total = Object.assign({}, this.state.total);
+    total[feature] = newTotal;
+    this.setState({
+      total
     });
   }
 
@@ -40,8 +48,12 @@ class App extends Component {
     return (
       <div className="App">
         <Header />
-        <List files={this.props.files} />
-        <ShoppingCart />
+        <List 
+          files={this.props.files}
+          price={this.state.updatePrice} 
+          selected={this.state.updateFeature} />
+        <ShoppingCart 
+          total={this.state.updateTotal} />
       </div>
     );
   }
