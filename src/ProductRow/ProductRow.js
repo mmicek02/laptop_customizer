@@ -2,6 +2,13 @@
 import React, {Component} from 'react';
 import '../App.css';
 
+// This object will allow us to
+// easily convert numbers into US dollar values
+const USCurrencyFormat = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD'
+  });
+
 class ProductRow extends Component {
     render () {
         console.log(this.props);
@@ -15,7 +22,7 @@ class ProductRow extends Component {
                 <div className="summary__option__label">{feature} </div>
                 <div className="summary__option__value">{selectedOption.name}</div>
                 <div className="summary__option__cost">
-                {this.props.USCurrencyFormat.format(selectedOption.cost)}
+                    {USCurrencyFormat.format(selectedOption.cost)}
                 </div>
             </div>
             );

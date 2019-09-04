@@ -12,7 +12,7 @@ const USCurrencyFormat = new Intl.NumberFormat('en-US', {
 class CustomLaptopOptions extends Component {
     
     render() {
-        //console.log(this.props);
+        console.log(this.props);
         // This takes the features from the array FEATURES and allows them to be manipulated
         const features = Object.keys(this.props.features).map((feature, idx) => {
             const featureHash = feature + '-' + idx;

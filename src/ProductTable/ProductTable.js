@@ -15,7 +15,7 @@ class ProductTable extends Component {
                 <div className="summary__option__label">{feature} </div>
                 <div className="summary__option__value">{selectedOption.name}</div>
                 <div className="summary__option__cost">
-                {USCurrencyFormat.format(selectedOption.cost)}
+                    {USCurrencyFormat.format(selectedOption.cost)}
                 </div>
             </div>
             );
@@ -23,7 +23,7 @@ class ProductTable extends Component {
 
         return (
             <div>
-                
+                {summary}
             </div>
         );
     }

@@ -2,13 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import ProductRow from './ProductRow/ProductRow';
 import CustomLaptopOptions from './CustomLaptopOptions/CustomLaptopOptions';
-
-// This object will allow us to
-// easily convert numbers into US dollar values
-const USCurrencyFormat = new Intl.NumberFormat('en-US', {
-  style: 'currency',
-  currency: 'USD'
-});
+import ProductTotal from './ProductTotal/ProductTotal';
 
 class App extends Component {
   state = {
@@ -42,11 +36,11 @@ class App extends Component {
 
   render() {
     //
-    const total = Object.keys(this.state.selected).reduce(
-      (acc, curr) => acc + this.state.selected[curr].cost,
-      0
-    );
-
+    /*  
+        const total = Object.keys(this.state.selected).reduce(
+        (acc, curr) => acc + this.state.selected[curr].cost, 0
+        );
+    */
     return (
       // Displays the total of the all of the selected features of the laptop
       <div className="App">
@@ -58,19 +52,16 @@ class App extends Component {
             <h2>Customize your laptop</h2>
             <CustomLaptopOptions 
               features = {this.props.features} 
-              selected = {this.state.selected} 
-              USCurrencyFormat = {this.state.USCurrencyFormat} />
+              selected = {this.state.selected} />
           </form>
           <section className="main__summary">
             <h2>Your cart</h2>
             <ProductRow
-                summary = {this.state.summary} 
-                selected = {this.state.selected} />
+              summary = {this.state.summary} 
+              selected = {this.state.selected} />
             <div className="summary__total">
-              <div className="summary__total__label">Total</div>
-              <div className="summary__total__value">
-                {total}
-              </div>
+            <ProductTotal 
+              total = {this.state.total} />
             </div>
           </section>
         </main>
