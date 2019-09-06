@@ -5,42 +5,51 @@ import CustomLaptopOptions from './CustomLaptopOptions/CustomLaptopOptions';
 import ProductTotal from './ProductTotal/ProductTotal';
 
 class App extends Component {
-  state = {
-    selected: {
-      Processor: {
-        name: '17th Generation Intel Core HB (7 Core with donut spare)',
-        cost: 700
+  constructor (props) {
+    super(props) 
+    this.state = {
+      selected: {
+        Processor: {
+          name: '17th Generation Intel Core HB (7 Core with donut spare)',
+          cost: 700
+        },
+        'Operating System': {
+          name: 'Ubuntu Linux 16.04',
+          cost: 200
+        },
+        'Video Card': {
+          name: 'Toyota Corolla 1.5v',
+          cost: 1150.98
+        },
+        Display: {
+          name: '15.6" UHD (3840 x 2160) 60Hz Bright Lights and Knobs',
+          cost: 1500
+        }
       },
-      'Operating System': {
-        name: 'Ubuntu Linux 16.04',
-        cost: 200
-      },
-      'Video Card': {
-        name: 'Toyota Corolla 1.5v',
-        cost: 1150.98
-      },
-      Display: {
-        name: '15.6" UHD (3840 x 2160) 60Hz Bright Lights and Knobs',
-        cost: 1500
-      }
-    }
-  };
+      total: 3550.98
+    };
+  }
+
 
   updateFeature = (feature, newValue) => {
     const selected = Object.assign({}, this.state.selected);
     selected[feature] = newValue;
+    const total = Object.keys(selected).reduce(
+      (acc, curr) => acc + selected[curr].cost, 0
+      );
+    const USCurrencyFormat = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD'
+    });
     this.setState({
-      selected
+      selected,
+      total,
+      USCurrencyFormat
     });
   };
 
   render() {
-    //
-    /*  
-        const total = Object.keys(this.state.selected).reduce(
-        (acc, curr) => acc + this.state.selected[curr].cost, 0
-        );
-    */
+
     return (
       // Displays the total of the all of the selected features of the laptop
       <div className="App">
@@ -52,7 +61,8 @@ class App extends Component {
             <h2>Customize your laptop</h2>
             <CustomLaptopOptions 
               features = {this.props.features} 
-              selected = {this.state.selected} />
+              selected = {this.state.selected} 
+              updateFeature = {this.updateFeature} />
           </form>
           <section className="main__summary">
             <h2>Your cart</h2>
